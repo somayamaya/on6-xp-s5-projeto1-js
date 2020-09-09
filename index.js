@@ -265,25 +265,26 @@ const pessoa = {
 // Quero criar as variáveis pessoa2 e pessoa3 com as mesmas propriedades, mas alterando os valores de nome, sobrenome, altura e peso
 
 const pessoa2 = {
-  nome: 'Yasminn',
-  sobrenome: 'Vaz',
+  nome: 'Cintia',
+  sobrenome: 'Yamamoto',
   idade: 25,
   altura: 1.62,
   peso: 55,
   andando: false,
   caminhouQuantosMetros: 0,
-  fazerAniversario: () => pessoa.idade++,
-  andar: (metrosCaminhados) => {
+  // neste caso, tambem poderia usar sem a palavra reservada function, mas para usar o this, nao pode ser arrow function
+  fazerAniversario:function (){this.idade++} ,
+  andar:function (metrosCaminhados)  {
     pessoa.andando = true
     pessoa.caminhouQuantosMetros += metrosCaminhados
   },
-  parar: () => pessoa.andando = false,
-  apresentacao: () => {
-    const anos = (pessoa.idade === 1) ? 'ano' : 'anos'
+  parar:function () {  this.andando = false},
+  apresentacao: function ()  {
+    const anos = (this.idade === 1) ? 'ano' : 'anos'
   
-    const metros = (pessoa.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
+    const metros = (this.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
   
-    return `Olá, eu sou ${pessoa.nome} ${pessoa.sobrenome}, tenho ${pessoa.idade} ${anos}, ${pessoa.altura}, meu peso é ${pessoa.peso} e, só hoje, eu já caminhei ${pessoa.caminhouQuantosMetros} ${metros}!`
+    return `Olá, eu sou ${this.nome} ${this.sobrenome}, tenho ${this.idade} ${anos}, ${this.altura}, meu peso é ${this.peso} e, só hoje, eu já caminhei ${this.caminhouQuantosMetros} ${metros}!`
   }
 }
 
@@ -304,6 +305,27 @@ console.log('Classes 🆕')
 
 // Vamos criar a classe Pessoa
 
+class Pessoa{
+  constructor(name, surname, age, walking = false, distance = 0 ){
+    this.nome = name
+    this.sobrenome = surname
+    this.idade = age
+    this.andando = walking
+    this. caminhouQuantosMetros = distance
+    
+  }
+  fazerAniversario(){
+    this.idade++
+  }
+}
+
+const pessoa3 = new Pessoa ('Camila', ' Marques', 24)
+console.log(pessoa3.nome)
+const {sobrenome} = pessoa3
+console.log(sobrenome)
+pessoa3.fazerAniversario()
+
+const pessoa4 = new Pessoa ('Edlaine', 36 ,'POntes' , true, 500)
 
 
 
@@ -348,7 +370,13 @@ const numbers = [9, 2, 5]
 // Possuo 4 tias. Os dados delas estão armazenados no array de objetos dentro do arquivo db.js
 // Vamos importar esses dados para podermos usá-los durante nosso exercício de revisão.
 const db = require('./db')
+const { tias } = require('./db')
 
+console.log(tias)
+
+// é um objeto dentro do db que tem uma propriedade chamada tia
+const { tias } = db
+console.log(tias)
 
 
 
@@ -371,10 +399,17 @@ console.log('-----------------------------------------------------')
 console.log('filter()')
 // filter
 // Filtre as tias que moram em SP e mostre no console.
+function filtrarTias(item){
+  return item.local === 'SP'
+
+}
+const tiasSP = tias.filter(item)
+console.table(tiasSP);
 
 
+const tiasSP = tias.filter(item => item.local === "SP");
 
-
+console.table(tiasSP);
 
 
 
@@ -397,15 +432,17 @@ console.log('sort()')
 // const numbers = [9, 2, 5]
 
 const comparar = (a, b) => {
-  if (a < b) { // primeiro vem b e depois vem a
+  if (a < b) { // mantenho a como primeiro e b vem depoisa
     return -1
-  } else if (a > b) { // mantenho a como primeiro e b vem depois
+  } else if (a > b) { // primeiro vem b e depois vem 
     return 1
   } else { // se a e b forem iguais, mantém a mesma ordem
     return 0
   }
 }
 
+numbers.sort(comparar)
+console.log(numbers);
 // Refatore a função comparar e ordene numbers em ordem crescente
 
 

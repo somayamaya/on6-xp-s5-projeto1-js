@@ -1,0 +1,22 @@
+{
+  "name": "on6-xp-s5-projeto1",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somayamaya/on6-xp-s5-projeto1-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/somayamaya/on6-xp-s5-projeto1-js/issues"
+  },
+  "homepage": "https://github.com/somayamaya/on6-xp-s5-projeto1-js#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
